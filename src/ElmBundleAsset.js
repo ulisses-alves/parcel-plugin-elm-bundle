@@ -18,16 +18,21 @@ class ElmBundleAsset extends Asset {
       throw new Error(`Elm bundle "${this.name}" must define "modules" non-empty array property.`)
     }
 
-    const baseDir = path.dirname(this.name)
-    this.modules = bundle.modules.map(m => path.join(baseDir, m))
+    this.elmBundle = bundle
     await this.getConfig(['elm.json'], {load: false})
   }
 
   async collectDependencies () {
-    const dependencies = this.modules.map(m => elm.findAllDependencies(m))
-    const depTree = await Promise.all(dependencies);
-    const deps = depTree.reduce((a, d) => a.concat(d), []);
-    deps.forEach(dep => this.addDependency(dep, { includedInParent: true }));
+    const baseDir = path.dirname(this.name)
+
+    const foundDependencies = this.elmBundle.modules
+      .map(m => path.join(baseDir, m))
+      .map(m => elm.findAllDependencies(m).then(deps => [m, ...deps]))
+
+    const dependencyTree = await Promise.all(foundDependencies);
+    const allDependencies = dependencyTree.reduce((a, deps) => [...a, ...deps], [])
+
+    allDependencies.forEach(dep => this.addDependency(dep, { includedInParent: true }));
   }
 
   async generate () {
@@ -37,7 +42,10 @@ class ElmBundleAsset extends Asset {
       cwd: path.dirname(this.name)
     }
 
-    const compiled = await elm.compileToString(this.modules, elmOptions)
+    const baseDir = path.dirname(this.name)
+    const modules = this.elmBundle.modules.map(m => path.join(baseDir, m))
+
+    const compiled = await elm.compileToString(modules, elmOptions)
     this.contents = `var output = {}; (function() {${compiled.toString()}}).call(output); module.exports = output.Elm;`
 
     return {
