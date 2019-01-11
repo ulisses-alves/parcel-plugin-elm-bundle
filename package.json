@@ -1,0 +1,27 @@
+{
+  "name": "parcel-plugin-elm-bundle",
+  "version": "1.0.0",
+  "description": "Parcel plugin for bundling multiple Elm applications.",
+  "main": "src/index.js",
+  "keywords": [
+    "elm",
+    "parcel",
+    "parcel-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ulisses-alves/parcel-plugin-elm-bundle.git"
+  },
+  "author": "Ulisses Bini de Paiva Alves <ulissesbpalves@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "node-elm-compiler": "^5.0.1",
+    "parcel": "^1.11.0",
+    "terser": "^3.14.1"
+  }
+}
