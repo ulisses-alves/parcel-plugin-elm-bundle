@@ -15,7 +15,7 @@ class ElmBundleAsset extends Asset {
     const bundle = JSON.parse(contents)
 
     if (!(bundle.modules instanceof Array) || bundle.modules.length === 0) {
-      return reject(`Elm bundle "${this.name}" must define "modules" non-empty array property.`)
+      throw new Error(`Elm bundle "${this.name}" must define "modules" non-empty array property.`)
     }
 
     const baseDir = path.dirname(this.name)
