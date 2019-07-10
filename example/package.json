@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-elm-compiler": "^5.0.1",
+    "node-elm-compiler": "^5.0.3",
     "parcel-plugin-elm-bundle": "file:.."
   },
   "dependencies": {
-    "parcel": "^1.11.0"
+    "parcel": "^1.12.3"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "parcel-plugin-elm-bundle",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parcel plugin for bundling multiple Elm applications.",
   "main": "src/index.js",
   "keywords": [
@@ -20,8 +20,8 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "node-elm-compiler": "^5.0.1",
-    "parcel": "^1.11.0",
-    "terser": "^3.14.1"
+    "node-elm-compiler": "^5.0.3",
+    "parcel": "^1.12.3",
+    "terser": "^4.1.2"
   }
 }
