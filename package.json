@@ -21,7 +21,7 @@
   "dependencies": {},
   "devDependencies": {
     "node-elm-compiler": "^5.0.5",
-    "parcel": "^1.12.4",
+    "parcel": "^2.8.2",
     "terser": "^4.1.2"
   }
 }
